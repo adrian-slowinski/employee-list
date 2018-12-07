@@ -13,30 +13,36 @@ employeers.push(createEmployee("Amelia", "Clark", "21", "female", true));
 employeers.push(createEmployee("Jack", "Jones", "31", "male", true));
 employeers.push(createEmployee("Olivia", "Wilde", "26", "male", true));
 
-// Wyświetlenie kluczy, ale z każdego elementu z tablicy, w tej sytuacji 4 razy To był błąd
-// let employersHeader = employeers.forEach(function(employee){
-//   console.log(Object.keys(employee));
-// })
- 
-// W związku z tym, że każdy klucz jest taki sam trzeba wyświetlić tylko jeden raz. Dlatego pobieram klucze z pierwszego elementu tablicy employeers
-// console.log(Object.keys(employeers[0]));
 
 function fillEmployeeTable(employeers){
-  let employersDOM = document.querySelector(".employeers");  
+  let employersDOM = document.querySelector(".employeers");
+  let tabHead = employersDOM.querySelector(".table__head").querySelector(".table__row");
+  let tabBody = employersDOM.querySelector(".table__body").querySelector(".table__row");
+  console.log(tabHead);
 
-  let employersHeaders = Object.keys(employeers[0]);
-  let employersHeadersLength = employersHeaders.length;
-
-    for (let i = 0; i < employersHeadersLength; i++) {
-       console.log(employersHeaders[i]);
+  function showKeyName(){ 
+    let employersHeaders = Object.keys(employeers[0]); // Pobranie nazw kluczy obiektu 
+    let employersHeadersLength = employersHeaders.length; // Pobranie długości klucza
+   
+    let th = "";
+    for (let i = 0; i < employersHeadersLength; i++) {       // Przeiterowanie każdego elementu 
+      th = document.createElement('th');
+      th.setAttribute("scope", "col");
+      th.classList.add("table__head--item"); 
+      th.textContent = employersHeaders[i].toLocaleUpperCase();
+  
+      tabHead.appendChild(th);
+      console.log(th);   
     }
+  }
 
-  console.log(employersHeaders);
+  function fillCels(employeers){
+    console.log(employeers.values(employee))
+  }
 
-  let employersTableHeaders = "";
+  showKeyName();
+  fillCels();
 }
-
-
 
 fillEmployeeTable(employeers);
 
