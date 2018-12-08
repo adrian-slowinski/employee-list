@@ -13,6 +13,7 @@ function createEmployee(firstName, lastName, age, sex, employed) {
 	employeers.push(createEmployee("Amelia", "Clark", "21", "female", true));
 	employeers.push(createEmployee("Jack", "Jones", "31", "male", true));
 	employeers.push(createEmployee("Olivia", "Wilde", "26", "male", true)); 
+	employeers.push(createEmployee("Victoria", "Picle", "23", "female", false)); 
 
 
 function fillEmployeeTable() {
@@ -48,17 +49,28 @@ function fillEmployeeTable() {
 		let tabBody = employersDOM.querySelector(".table__body");
 
 		tabBody.innerHTML = "";
-
-		employeers.forEach(function(worker, index) { 
+ 
+		employeers.forEach(function(worker, index) {  
+			let isEmployed = worker.employed;
+			if (worker.employed) {
+				isEmployed.innerHTML = `<td> <i class = "fas fa-check-circle" > ${worker.employed} < /i></td >`; 
+			} else if (!isEmployed) {
+				isEmployed.innerHTML = `<td> <i class = "fas fa-times-circle" > ${worker.employed} < /i></td >`; 
+			} 
 			tabBody.innerHTML += `<tr class="table__row">
 				<td> ${index += 1} </td>
 				<td> ${worker.firstName}</td>   
 				<td> ${worker.lastName} </td>   
 				<td> ${worker.age} </td>  
-				<td> ${worker.sex} </td>  
-				<td> ${worker.employed} </td> </tr>
+				<td> ${worker.sex} </td>   
+		${isEmployed ?
+			 '<td> <i class = "fas fa-check-circle" > </i></td>' 
+			 : 
+			'<td> <i class = "fas fa-times-circle" > </i> </td>'
+			}
+				</tr>
 			`; 
-			}); 
+		}); 
 	} 
 
 	let manBtn = document.querySelector('.btn-man')
