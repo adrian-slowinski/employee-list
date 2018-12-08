@@ -1,24 +1,25 @@
 function createEmployee(firstName, lastName, age, sex, employed) {
-    return {
-        firstName: firstName,
-        lastName: lastName,
-        age: age,
-        sex: sex,
-        employed: employed
-    }
+	return {
+		firstName: firstName,
+		lastName: lastName,
+		age: age,
+		sex: sex,
+		employed: employed
+	}
 }
-let employeers = [];
-employeers.push(createEmployee("John", "Doe", "31", "male", true));
-employeers.push(createEmployee("Amelia", "Clark", "21", "female", true));
-employeers.push(createEmployee("Jack", "Jones", "31", "male", true));
-employeers.push(createEmployee("Olivia", "Wilde", "26", "male", true)); 
+
+	let employeers = [];
+	employeers.push(createEmployee("John", "Doe", "31", "male", true));
+	employeers.push(createEmployee("Amelia", "Clark", "21", "female", true));
+	employeers.push(createEmployee("Jack", "Jones", "31", "male", true));
+	employeers.push(createEmployee("Olivia", "Wilde", "26", "male", true)); 
 
 
-function fillEmployeeTable(employeers) {
+function fillEmployeeTable() {
 	let employersDOM = document.querySelector(".employeers");
 	let tabHead = employersDOM.querySelector(".table__head").querySelector(".table__row");
 
-	function showKeyName() {
+	function showKeyName(employeers) {
 		let employersHeaders = Object.keys(employeers[0]); // Pobranie nazw kluczy obiektu 
 		let employersHeadersLength = employersHeaders.length; // Pobranie długości klucza
 
@@ -46,24 +47,46 @@ function fillEmployeeTable(employeers) {
 	function fillCels(employeers) {
 		let tabBody = employersDOM.querySelector(".table__body");
 
-		employeers.forEach(function(worker, index) {
+		tabBody.innerHTML = "";
 
-		tabBody.innerHTML += `<tr class="table__row">
-			<td> ${index += 1} </td>
-			<td> ${worker.firstName}</td>   
-			<td> ${worker.lastName} </td>   
-			<td> ${worker.age} </td>  
-			<td> ${worker.sex} </td>  
-			<td> ${worker.employed} </td> </tr>
-		`; 
-		}); 
+		employeers.forEach(function(worker, index) { 
+			tabBody.innerHTML += `<tr class="table__row">
+				<td> ${index += 1} </td>
+				<td> ${worker.firstName}</td>   
+				<td> ${worker.lastName} </td>   
+				<td> ${worker.age} </td>  
+				<td> ${worker.sex} </td>  
+				<td> ${worker.employed} </td> </tr>
+			`; 
+			}); 
 	} 
-	showKeyName();
-	fillCels(employeers);
+
+	let manBtn = document.querySelector('.btn-man')
+	let womanBtn = document.querySelector('.btn-woman')
+
+	womanBtn.addEventListener("click", showWomen);
+	manBtn.addEventListener("click", showMan);
+
+	function showMan() { 
+		let men = employeers.filter(function (employee, index, arr) {
+			return employee.sex === "male";
+		});
+
+		fillCels(men);
+	}
+
+	function showWomen() {
+		let women = employeers.filter(function (employee, index, arr) {
+			return employee.sex === "female";
+		});
+
+		fillCels(women);
+	}
+ 
+	showKeyName(employeers);
+	// fillCels(employeers);
 }
 
-fillEmployeeTable(employeers);
+fillEmployeeTable();
 
 
-
-console.log(employeers);
