@@ -32,16 +32,16 @@ function fillEmployeeTable() {
 
 			tabHead.appendChild(th);
 		}  
-			function addIndex() {
-				let th = "";
-				th = document.createElement('th');
-				th.setAttribute("scope", "col");
-				th.classList.add("table__head--item");
-				th.textContent = "Index".toLocaleUpperCase();
+		function addIndex() {
+			let th = "";
+			th = document.createElement('th');
+			th.setAttribute("scope", "col");
+			th.classList.add("table__head--item");
+			th.textContent = "Index".toLocaleUpperCase();
 
-				tabHead.prepend(th);
-			}
-			addIndex()
+			tabHead.prepend(th);
+		}
+		addIndex()
 	} 
 
 	function fillCels(employeers) {
@@ -63,9 +63,11 @@ function fillEmployeeTable() {
 
 	let manBtn = document.querySelector('.btn-man')
 	let womanBtn = document.querySelector('.btn-woman')
+	let refreshBtn = document.querySelector('.btn-refresh')
 
 	womanBtn.addEventListener("click", showWomen);
 	manBtn.addEventListener("click", showMan);
+	refreshBtn.addEventListener("click", refreshEmployeer);
 
 	function showMan() { 
 		let men = employeers.filter(function (employee, index, arr) {
@@ -82,9 +84,13 @@ function fillEmployeeTable() {
 
 		fillCels(women);
 	}
+
+	function refreshEmployeer(){
+		fillCels(employeers);
+	}
  
 	showKeyName(employeers);
-	// fillCels(employeers);
+	fillCels(employeers);
 }
 
 fillEmployeeTable();
