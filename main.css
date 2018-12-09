@@ -3,6 +3,10 @@ body{
     color: #fdfdfd
 } 
 
+modal label{
+    color: #222222;
+}
+
 .employeers {
     width: 100%;
 }
@@ -13,4 +17,8 @@ button{
 
 button:last-child{
     margin-right: 0;
+} 
+
+form{
+	color: #222222;
 }

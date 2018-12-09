@@ -76,10 +76,12 @@ function fillEmployeeTable() {
 	let manBtn = document.querySelector('.btn-man')
 	let womanBtn = document.querySelector('.btn-woman')
 	let refreshBtn = document.querySelector('.btn-refresh')
+	let addBtn = document.querySelector('.btn-addEmployeer')
 
 	womanBtn.addEventListener("click", showWomen);
 	manBtn.addEventListener("click", showMan);
 	refreshBtn.addEventListener("click", refreshEmployeer);
+	addBtn.addEventListener("click", addEmployeer);
 
 	function showMan() { 
 		let men = employeers.filter(function (employee, index, arr) {
@@ -100,6 +102,32 @@ function fillEmployeeTable() {
 	function refreshEmployeer(){
 		fillCels(employeers);
 	}
+ 
+	function addEmployeer(){ 
+		let firstName = document.querySelector("#inputFirstName").value;
+		let lastName = document.querySelector("#inputLastName").value;
+		let age = document.querySelector("#inputAge").value;
+		let sex = document.querySelector("#inputSex").value;
+		let itsEmployeer = document.querySelector("#itsEmployeer").checked;
+
+		console.log(firstName); 
+		console.log(lastName);
+		// console.log(age);
+		console.log(sex);
+		console.log(itsEmployeer);
+
+		if (sex.value === "1"){
+			console.log("male")
+		} else if (sex.value === "2") {
+			console.log("female")
+		}
+
+		console.log(employeers);
+		employeers.push(createEmployee(firstName, lastName, age, sex, itsEmployeer));
+		fillCels(employeers);
+	}
+
+	
  
 	showKeyName(employeers);
 	fillCels(employeers);
