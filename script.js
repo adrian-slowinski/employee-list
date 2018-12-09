@@ -1,3 +1,4 @@
+(function () {
 function createEmployee(firstName, lastName, age, sex, employed) {
 	return {
 		firstName: firstName,
@@ -8,17 +9,26 @@ function createEmployee(firstName, lastName, age, sex, employed) {
 	}
 }
 
-	let employeers = [];
-	employeers.push(createEmployee("John", "Doe", "31", "male", true));
-	employeers.push(createEmployee("Amelia", "Clark", "21", "female", true));
-	employeers.push(createEmployee("Jack", "Jones", "31", "male", true));
-	employeers.push(createEmployee("Olivia", "Wilde", "26", "male", true)); 
-	employeers.push(createEmployee("Victoria", "Picle", "23", "female", false)); 
-
+let employeers = [];
+employeers.push(createEmployee("John", "Doe", "31", "male", true));
+employeers.push(createEmployee("Amelia", "Clark", "21", "female", true));
+employeers.push(createEmployee("Jack", "Jones", "31", "male", true));
+employeers.push(createEmployee("Olivia", "Wilde", "26", "male", true)); 
+employeers.push(createEmployee("Victoria", "Picle", "23", "female", false)); 
 
 function fillEmployeeTable() {
 	let employersDOM = document.querySelector(".employeers");
 	let tabHead = employersDOM.querySelector(".table__head").querySelector(".table__row");
+
+	let manBtn = document.querySelector('.btn-man')
+	let womanBtn = document.querySelector('.btn-woman')
+	let refreshBtn = document.querySelector('.btn-refresh')
+	let addBtn = document.querySelector('.btn-addEmployeer')
+
+	womanBtn.addEventListener("click", showWomen);
+	manBtn.addEventListener("click", showMan);
+	refreshBtn.addEventListener("click", refreshEmployeer);
+	addBtn.addEventListener("click", addEmployeer);
 
 	function showKeyName(employeers) {
 		let employersHeaders = Object.keys(employeers[0]); // Pobranie nazw kluczy obiektu 
@@ -72,17 +82,7 @@ function fillEmployeeTable() {
 			`; 
 		}); 
 	} 
-
-	let manBtn = document.querySelector('.btn-man')
-	let womanBtn = document.querySelector('.btn-woman')
-	let refreshBtn = document.querySelector('.btn-refresh')
-	let addBtn = document.querySelector('.btn-addEmployeer')
-
-	womanBtn.addEventListener("click", showWomen);
-	manBtn.addEventListener("click", showMan);
-	refreshBtn.addEventListener("click", refreshEmployeer);
-	addBtn.addEventListener("click", addEmployeer);
-
+ 
 	function showMan() { 
 		let men = employeers.filter(function (employee, index, arr) {
 			return employee.sex === "male";
@@ -94,8 +94,7 @@ function fillEmployeeTable() {
 	function showWomen() {
 		let women = employeers.filter(function (employee, index, arr) {
 			return employee.sex === "female";
-		});
-
+		}); 
 		fillCels(women);
 	}
 
@@ -110,16 +109,18 @@ function fillEmployeeTable() {
 		let sex = document.querySelector("#inputSex").value;
 		let itsEmployeer = document.querySelector("#itsEmployeer").checked;
 
-		employeers.push(createEmployee(firstName, lastName, age, sex, itsEmployeer));
+		if (firstName && lastName && age && sex) {
+			employeers.push(createEmployee(firstName, lastName, age, sex, itsEmployeer)); 
+		} else {
+			alert("Please complete all fields.");
+		} 
 		fillCels(employeers);
-	}
+	} 
 
-	
- 
 	showKeyName(employeers);
-	fillCels(employeers);
-}
+	fillCels(employeers); 
+} 
 
 fillEmployeeTable();
 
-
+})();
