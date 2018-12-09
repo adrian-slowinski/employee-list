@@ -110,19 +110,6 @@ function fillEmployeeTable() {
 		let sex = document.querySelector("#inputSex").value;
 		let itsEmployeer = document.querySelector("#itsEmployeer").checked;
 
-		console.log(firstName); 
-		console.log(lastName);
-		// console.log(age);
-		console.log(sex);
-		console.log(itsEmployeer);
-
-		if (sex.value === "1"){
-			console.log("male")
-		} else if (sex.value === "2") {
-			console.log("female")
-		}
-
-		console.log(employeers);
 		employeers.push(createEmployee(firstName, lastName, age, sex, itsEmployeer));
 		fillCels(employeers);
 	}
